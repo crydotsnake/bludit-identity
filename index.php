@@ -6,13 +6,13 @@
 						<header>
 						<?php
 
-							$file = DOMAIN_UPLOAD_PROFILES.'avatar.jpg';
-							if( !file_exists (PATH_UPLOAD_PROFILES.'avatar.jpg') ){
+							if(!$site->logo()){
 								$file = DOMAIN_THEME.'images/avatar.jpg';
-							}	
-
-								echo '<span class="avatar"><img src="'.$file.'"></a>';
-							?>	
+							}else{
+								$file = $site->logo();
+							}
+								echo '<span class="avatar"><img src="'.$file.'" /></span>';
+							?>		
 						
 						<?php foreach($content as $page): ?>
 							<h1><?php echo $page->title(); ?></h1>
@@ -23,10 +23,20 @@
 
 						<footer>
 							<ul class="icons">
-								<li><a target="_blank" href="<?php echo $site->twitter(); ?>" class="icon brands fa-twitter">Twitter</a></li>
-								<li><a target="_blank" href="<?php echo $site->instagram(); ?>" class="icon brands fa-instagram">Instagram</a></li>
-								<li><a target="_blank" href="<?php echo $site->facebook(); ?>" class="icon brands fa-facebook-f">Facebook</a></li>
-								<li><a target="_blank" href="<?php echo $site->github(); ?>" class="icon brands fa-github">GitHub</a></li>
+								<?php 
+							if ($site->twitter()){
+								echo '<li><a target="_blank" href="'.$site->twitter().'" class="icon brands fa-twitter">Twitter</a></li>';
+								}
+							if ($site->instagram()){
+								echo '<li><a target="_blank" href="'.$site->instagram().'" class="icon brands fa-instagram">Instagram</a></li>';
+								}
+							if ($site->facebook()){
+								echo '<li><a target="_blank" href="'.$site->facebook().'" class="icon brands fa-facebook-f">Facebook</a></li>';
+								}
+							if ($site->github()){
+								echo '<li><a target="_blank" href="'.$site->github().'" class="icon brands fa-github">GitHub</a></li>';
+								}
+							?>
 							</ul>
 						</footer>
 					</section>
